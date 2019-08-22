@@ -8,7 +8,7 @@ class Person {
     }
 
     speak(){
-        console.log(`Hello my name is ${this.name}, I am from ${this.location}`)
+        console.log(`Hello my name is ${this.name}, I am from ${this.location}.`)
     }
 }
 
@@ -21,11 +21,11 @@ class Instructor extends Person{
     }
 
     demo(subject){
-        console.log(`Today we are learning about ${subject}`)
+        console.log(`Today we are learning about ${subject}!`)
     }
 
-    grade(subject){
-        console.log(`${student.name} receives a perfect score on ${subject}`)
+    grade(student, subject){
+        console.log(`${student.name} receives a perfect score on ${subject}!`)
     }
 
 }
@@ -39,15 +39,15 @@ class Student extends Person {
     }
 
     listsSubjects(){
-        console.log(this.favSubjects.values());
+        console.log(this.favSubjects.toString());
     }
 
-    PRAssignment(subject){
-        console.log(`${student.name} has submitted a PR for ${subject}`)
+    PRAssignment(student, subject){
+        console.log(`${student.name} has submitted a PR for ${subject}.`)
     }
 
-    sprintChallenge(subject){
-        console.log(`${student.name} has begun sprint challenge on ${subject}`)
+    sprintChallenge(student, subject){
+        console.log(`${student.name} has begun sprint challenge on ${subject}.`)
     }
 
 }
@@ -59,15 +59,86 @@ class ProjectManager extends Instructor {
         this.favInstructor = attrs.favInstructor
     }
 
-    standUp(channel){
-        console.log(`${this.name} announces to ${channel} @channel standy times!`)
+    standUp(pr, channel){
+        console.log(`${pr.name} announces to ${channel} '@channel standy times!'`)
     }
 
-    debugsCode(name, subject){
-        console.log(`${name} debugs ${student.name}'s code on ${subject}`)
+    debugsCode(pr, student, subject){
+        console.log(`${pr.name} debugs ${student.name}'s code on ${subject}!`)
     }
 
 }
 
 /*--------------------Test Objects-----------------*/
 
+const john = new Instructor({
+    name: "John",
+    location: "California",
+    age: 42,
+    specialty: "algorithms",
+    catchPhrase: "They say that nothing is wasted. Either that, or it all is."
+});
+
+const mary = new Instructor({
+    name: "Mary",
+    location: "Florida",
+    age: 36,
+    specialty: "UX/UI",
+    catchPhrase: "Genius might be the ability to say a profound thing in a simple way."
+});
+
+const steve = new Student({
+    name: "Steve",
+    age: 24,
+    location: "Texas",
+    previousBackground: "Landscaper",
+    className: "WEB23",
+    favSubjects: ["HTML", "Javascript", "React"]
+});
+
+const carla = new Student({
+    name: "Carla",
+    age: 25,
+    location: "Alaska",
+    previousBackground: "QC Inspector",
+    className: "WEB21",
+    favSubjects: ["Algorithms", "Machine Learning"]
+});
+
+const anthony = new ProjectManager({
+    name: "Anthony",
+    location: "Maine",
+    age: 45,
+    specialty: "Front-End",
+    catchPhrase: "Trust the process!",
+    gradClassName: "WEB21",
+    favInstructor: "Mary"
+})
+
+const emily = new ProjectManager({
+    name: "Emily",
+    location: "Utah",
+    age: 34,
+    specialty: "Javascript",
+    catchPhrase: "I don't have a catchphrase",
+    gradClassName: "WEB22",
+    favInstructor: "John",
+})
+
+/*-------------Tests------------*/
+
+anthony.speak();
+
+mary.demo("HTML");
+
+john.grade(anthony, "Javascript");
+
+carla.listsSubjects();
+
+steve.PRAssignment(steve, "Flexbox I");
+
+carla.sprintChallenge(carla, "Javascript");
+
+emily.standUp(emily, "WEB23");
+
+anthony.debugsCode(anthony, carla, "Node.js");
